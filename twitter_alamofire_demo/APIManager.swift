@@ -41,6 +41,7 @@ class APIManager: SessionManager {
                     print("Welcome \(user.name)")
                     
                     // MARK: TODO: set User.current, so that it's persisted
+                    User.current = user
                     
                     success()
                 }
@@ -51,10 +52,11 @@ class APIManager: SessionManager {
     }
     
     func logout() {
+        
         clearCredentials()
         
         // TODO: Clear current user by setting it to nil
-
+        User.current = nil
         NotificationCenter.default.post(name: NSNotification.Name("didLogout"), object: nil)
     }
 
@@ -119,11 +121,85 @@ class APIManager: SessionManager {
     
     // MARK: TODO: Favorite a Tweet
     
+    func favorite(_ tweet: Tweet, completion: @escaping (Tweet?, Error?) -> ()) {
+        let urlString = "https://api.twitter.com/1.1/favorites/create.json"
+        let parameters = ["id": tweet.id]
+        
+        request(URL(string:urlString)!, method: .post, parameters: parameters, encoding: URLEncoding.queryString)
+            .validate()
+            .responseJSON { (response) in
+            if response.result.isSuccess,
+                let tweetDictionary = response.result.value as? [String: Any] {
+                print(response)
+                let tweet = Tweet(dictionary: tweetDictionary)
+                completion(tweet, nil)
+            } else {
+                print(response.result.error)
+                completion(nil, response.result.error)
+            }
+        }
+        
+    }
+    
     // MARK: TODO: Un-Favorite a Tweet
+    
+    func unfavorite(_ tweet: Tweet, completion: @escaping (Tweet?, Error?) -> ()) {
+        let urlString = "https://api.twitter.com/1.1/favorites/destroy.json"
+        let parameters = ["id": tweet.id]
+        request(URL(string:urlString)!, method: .post, parameters: parameters, encoding: URLEncoding.queryString).validate().responseJSON { (response) in
+            if response.result.isSuccess,
+                let tweetDictionary = response.result.value as? [String: Any] {
+                print(response)
+                let tweet = Tweet(dictionary: tweetDictionary)
+                completion(tweet, nil)
+            } else {
+                completion(nil, response.result.error)
+            }
+        }
+    }
     
     // MARK: TODO: Retweet
     
+    func retweet(_ tweet: Tweet, completion: @escaping (Tweet?, Error?) -> ()) {
+        let urlString = "https://api.twitter.com/1.1/retweet/create.json"
+        let parameters = ["id": tweet.id]
+        
+        request(URL(string:urlString)!, method: .post, parameters: parameters, encoding: URLEncoding.queryString)
+            .validate()
+            .responseJSON { (response) in
+                if response.result.isSuccess,
+                    let tweetDictionary = response.result.value as? [String: Any] {
+                    print(response)
+                    let tweet = Tweet(dictionary: tweetDictionary)
+                    completion(tweet, nil)
+                } else {
+                    print(response.result.error)
+                    completion(nil, response.result.error)
+                }
+        }
+        
+    }
+    
     // MARK: TODO: Un-Retweet
+    func unretweet(_ tweet: Tweet, completion: @escaping (Tweet?, Error?) -> ()) {
+        let urlString = "https://api.twitter.com/1.1/retweet/destroy.json"
+        let parameters = ["id": tweet.id]
+        
+        request(URL(string:urlString)!, method: .post, parameters: parameters, encoding: URLEncoding.queryString)
+            .validate()
+            .responseJSON { (response) in
+                if response.result.isSuccess,
+                    let tweetDictionary = response.result.value as? [String: Any] {
+                    print(response)
+                    let tweet = Tweet(dictionary: tweetDictionary)
+                    completion(tweet, nil)
+                } else {
+                    print(response.result.error)
+                    completion(nil, response.result.error)
+                }
+        }
+        
+    }
     
     // MARK: TODO: Compose Tweet
     
