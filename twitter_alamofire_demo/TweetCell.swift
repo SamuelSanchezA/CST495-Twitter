@@ -57,26 +57,26 @@ class TweetCell: UITableViewCell {
             tweet.favoriteCount! += 1
             favoriteCountTextLabel.text = "\(tweet.favoriteCount!)"
             (sender as! UIButton).setImage(#imageLiteral(resourceName: "favor-icon-red"), for: .normal)
-            //        APIManager.shared.favorite(tweet) { (tweet: Tweet?, error: Error?) in
-            //            if let  error = error {
-            //                print("Error favoriting tweet: \(error.localizedDescription)")
-            //            } else if let tweet = tweet {
-            //                print("Successfully favorited the following Tweet: \n\(tweet.text)")
-            //            }
-            //        }
+                    APIManager.shared.favorite(tweet) { (tweet: Tweet?, error: Error?) in
+                        if let  error = error {
+                            print("Error favoriting tweet: \(error.localizedDescription)")
+                        } else if let tweet = tweet {
+                            print("Successfully favorited the following Tweet: \n\(tweet.text)")
+                        }
+                    }
         }
         else{
             tweet.favorited = false
             tweet.favoriteCount! -= 1
             favoriteCountTextLabel.text = "\(tweet.favoriteCount!)"
             (sender as! UIButton).setImage(#imageLiteral(resourceName: "favor-icon"), for: .normal)
-//            APIManager.shared.unfavorite(tweet, completion: { (tweet, error) in
-//                if let  error = error {
-//                    print("Error favoriting tweet: \(error.localizedDescription)")
-//                } else if let tweet = tweet {
-//                    print("Successfully favorited the following Tweet: \n\(tweet.text)")
-//                }
-//            })
+            APIManager.shared.unfavorite(tweet, completion: { (tweet, error) in
+                if let  error = error {
+                    print("Error unfavoriting tweet: \(error.localizedDescription)")
+                } else if let tweet = tweet {
+                    print("Successfully unfavorited the following Tweet: \n\(tweet.text)")
+                }
+            })
         }
 
     }
@@ -87,26 +87,26 @@ class TweetCell: UITableViewCell {
             tweet.retweetCount += 1
             retweetCountTextLabel.text = "\(tweet.retweetCount)"
             (sender as! UIButton).setImage(#imageLiteral(resourceName: "retweet-icon-green"), for: .normal)
-            //            APIManager.shared.retweet(tweet, completion: { (tweet, error) in
-            //                if let  error = error {
-            //                    print("Error favoriting tweet: \(error.localizedDescription)")
-            //                } else if let tweet = tweet {
-            //                    print("Successfully favorited the following Tweet: \n\(tweet.text)")
-            //                }
-            //            })
+                        APIManager.shared.retweet(tweet, completion: { (tweet, error) in
+                            if let  error = error {
+                                print("Error retweeting tweet: \(error.localizedDescription)")
+                            } else if let tweet = tweet {
+                                print("Successfully retweeting the following Tweet: \n\(tweet.text)")
+                            }
+                        })
         }
         else{
             tweet.retweeted = false
             tweet.retweetCount -= 1
             retweetCountTextLabel.text = "\(tweet.retweetCount)"
             (sender as! UIButton).setImage(#imageLiteral(resourceName: "retweet-icon"), for: .normal)
-            //            APIManager.shared.unretweet(tweet, completion: { (tweet, error) in
-            //                if let  error = error {
-            //                    print("Error favoriting tweet: \(error.localizedDescription)")
-            //                } else if let tweet = tweet {
-            //                    print("Successfully favorited the following Tweet: \n\(tweet.text)")
-            //                }
-            //            })
+                        APIManager.shared.unretweet(tweet, completion: { (tweet, error) in
+                            if let  error = error {
+                                print("Error unretweeting tweet: \(error.localizedDescription)")
+                            } else if let tweet = tweet {
+                                print("Successfully unretweeted the following Tweet: \n\(tweet.text)")
+                            }
+                        })
         }
         
     }
