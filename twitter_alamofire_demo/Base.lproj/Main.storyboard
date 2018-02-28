@@ -95,32 +95,32 @@
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lBt-Kx-kE0">
-                                                            <rect key="frame" x="113" y="8" width="40" height="20"/>
+                                                            <rect key="frame" x="106" y="8" width="54" height="20"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="40" id="bky-cA-5rU"/>
+                                                                <constraint firstAttribute="width" constant="54" id="bky-cA-5rU"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zF2-Zb-jzi">
-                                                            <rect key="frame" x="161" y="1" width="30" height="30"/>
+                                                            <rect key="frame" x="161" y="2" width="30" height="30"/>
                                                             <state key="normal" image="favor-icon"/>
                                                             <connections>
                                                                 <action selector="didTapFavorite:" destination="U1g-kw-izy" eventType="touchUpInside" id="TMp-Vd-d9y"/>
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cO-Ht-goM">
-                                                            <rect key="frame" x="196" y="8" width="40" height="20"/>
+                                                            <rect key="frame" x="189" y="8" width="50" height="20"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="40" id="7PC-3J-0n5"/>
+                                                                <constraint firstAttribute="width" constant="50" id="7PC-3J-0n5"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pSM-9n-WZ9">
-                                                            <rect key="frame" x="242" y="5" width="30" height="30"/>
+                                                            <rect key="frame" x="245" y="5" width="30" height="30"/>
                                                             <state key="normal" image="message-icon"/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vKp-cJ-7kT">
@@ -132,16 +132,16 @@
                                                     <constraints>
                                                         <constraint firstItem="6cO-Ht-goM" firstAttribute="top" secondItem="FEJ-mb-FEP" secondAttribute="top" constant="8" id="2le-69-XXW"/>
                                                         <constraint firstAttribute="height" constant="36" id="5f3-TP-IZ3"/>
-                                                        <constraint firstItem="zF2-Zb-jzi" firstAttribute="top" secondItem="FEJ-mb-FEP" secondAttribute="top" constant="1" id="92o-zx-l9L"/>
+                                                        <constraint firstItem="zF2-Zb-jzi" firstAttribute="top" secondItem="FEJ-mb-FEP" secondAttribute="top" constant="2" id="92o-zx-l9L"/>
                                                         <constraint firstItem="LX4-mH-14s" firstAttribute="leading" secondItem="vKp-cJ-7kT" secondAttribute="trailing" constant="45" id="AKg-2r-1Lh"/>
                                                         <constraint firstItem="vKp-cJ-7kT" firstAttribute="top" secondItem="FEJ-mb-FEP" secondAttribute="top" constant="3" id="AU0-g6-k9l"/>
                                                         <constraint firstItem="LX4-mH-14s" firstAttribute="top" secondItem="FEJ-mb-FEP" secondAttribute="top" constant="3" id="ENu-pO-F3u"/>
-                                                        <constraint firstItem="6cO-Ht-goM" firstAttribute="leading" secondItem="zF2-Zb-jzi" secondAttribute="trailing" constant="5" id="GDg-dK-63V"/>
-                                                        <constraint firstItem="zF2-Zb-jzi" firstAttribute="leading" secondItem="lBt-Kx-kE0" secondAttribute="trailing" constant="8" id="IYg-U9-TWu"/>
+                                                        <constraint firstItem="6cO-Ht-goM" firstAttribute="leading" secondItem="zF2-Zb-jzi" secondAttribute="trailing" constant="-2" id="GDg-dK-63V"/>
+                                                        <constraint firstItem="zF2-Zb-jzi" firstAttribute="leading" secondItem="lBt-Kx-kE0" secondAttribute="trailing" constant="1" id="IYg-U9-TWu"/>
                                                         <constraint firstItem="pSM-9n-WZ9" firstAttribute="leading" secondItem="6cO-Ht-goM" secondAttribute="trailing" constant="6" id="M5a-kP-rWl"/>
-                                                        <constraint firstItem="lBt-Kx-kE0" firstAttribute="leading" secondItem="LX4-mH-14s" secondAttribute="trailing" constant="8" id="YXf-eF-9No"/>
+                                                        <constraint firstItem="lBt-Kx-kE0" firstAttribute="leading" secondItem="LX4-mH-14s" secondAttribute="trailing" constant="1" id="YXf-eF-9No"/>
                                                         <constraint firstAttribute="width" constant="292" id="fnJ-ew-n4P"/>
-                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pSM-9n-WZ9" secondAttribute="trailing" constant="18" id="gj8-D2-ljg"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pSM-9n-WZ9" secondAttribute="trailing" constant="17" id="gj8-D2-ljg"/>
                                                         <constraint firstItem="vKp-cJ-7kT" firstAttribute="leading" secondItem="FEJ-mb-FEP" secondAttribute="leading" id="nck-vk-R6G"/>
                                                         <constraint firstItem="pSM-9n-WZ9" firstAttribute="top" secondItem="FEJ-mb-FEP" secondAttribute="top" constant="5" id="u82-ih-Gak"/>
                                                         <constraint firstItem="lBt-Kx-kE0" firstAttribute="top" secondItem="FEJ-mb-FEP" secondAttribute="top" constant="8" id="zMR-6h-74J"/>
