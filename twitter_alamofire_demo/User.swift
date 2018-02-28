@@ -7,10 +7,14 @@
 //
 
 import Foundation
+import DateToolsSwift
 
 class User {
     
     var name: String
+    var screen_name: String
+    var profile_url: URL
+    
     // For user persistance
     var dictionary: [String: Any]?
     private static var _current: User?
@@ -39,6 +43,8 @@ class User {
     
     init(dictionary: [String: Any]) {
         name = dictionary["name"] as! String
+        screen_name = dictionary["screen_name"] as! String
+        profile_url = URL(string: dictionary["profile_image_url"] as! String)!
         self.dictionary = dictionary
     }
 }
