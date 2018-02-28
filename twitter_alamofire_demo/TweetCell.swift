@@ -27,7 +27,9 @@ class TweetCell: UITableViewCell {
             tweetTextLabel.text = tweet.text
             usernameLabel.text = tweet.user.name
             screennameLabel.text = "@\(tweet.user.screen_name)"
-            dateLabel.text = "\(tweet.createdAtString)"
+            
+            dateLabel.text = "\(formattedDate(date: tweet.createdAtString))"
+            
             favoriteCountTextLabel.text = "\(tweet.favoriteCount!)"
             retweetCountTextLabel.text = "\(tweet.retweetCount)"
             
@@ -93,6 +95,42 @@ class TweetCell: UITableViewCell {
             })
         }
 
+    }
+    
+    func formattedDate(date: String) -> String{
+        
+        let df = DateFormatter()
+        df.dateStyle = .full
+        df.timeStyle = .full
+
+        var formattedTime = ""
+        let today = Date()
+        let postedDate = df.date(from: date)
+        let timeDiff = postedDate?.secondsEarlier(than: today)
+        
+        //Seconds
+        if(timeDiff! < 60){
+            formattedTime = "\(timeDiff!)s"
+        }
+        //Minutes
+        else if(timeDiff! < 3600){
+            formattedTime = "\(timeDiff! / 60)m"
+        }
+        //Hours
+        else if(timeDiff! < 86400){
+            formattedTime = "\(timeDiff! / 60 / 60)h"
+        }
+        //Days
+        else if(timeDiff! < 604800){
+            formattedTime = "\(timeDiff! / 60 / 60 / 24)"
+        }
+        //Simple date format
+        else{
+            df.dateStyle = .short
+            df.timeStyle = .none
+            formattedTime = df.string(from: df.date(from: date)!)
+        }
+        return formattedTime
     }
     
     @IBAction func didTapRetweet(_ sender: Any) {
