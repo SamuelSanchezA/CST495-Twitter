@@ -9,11 +9,11 @@
 import UIKit
 import DateToolsSwift
 import AlamofireImage
-//import ActiveLabel
+import TTTAttributedLabel
 
-class TweetCell: UITableViewCell {
+class TweetCell: UITableViewCell, TTTAttributedLabelDelegate {
     
-    @IBOutlet weak var tweetTextLabel: UILabel!
+    @IBOutlet weak var tweetTextLabel: TTTAttributedLabel!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var screennameLabel: UILabel!
@@ -25,7 +25,10 @@ class TweetCell: UITableViewCell {
     
     var tweet: Tweet! {
         didSet {
+            tweetTextLabel.enabledTextCheckingTypes = NSTextCheckingResult.CheckingType.link.rawValue
+            tweetTextLabel.delegate = self
             tweetTextLabel.text = tweet.text
+            
             usernameLabel.text = tweet.user.name
             screennameLabel.text = "@\(tweet.user.screen_name)"
             
