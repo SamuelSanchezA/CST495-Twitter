@@ -8,11 +8,15 @@
 
 import UIKit
 import DateToolsSwift
+import AlamofireImage
 
 class TweetCell: UITableViewCell {
     
     @IBOutlet weak var tweetTextLabel: UILabel!
-    
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var screennameLabel: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var favoriteCountTextLabel: UILabel!
@@ -21,8 +25,16 @@ class TweetCell: UITableViewCell {
     var tweet: Tweet! {
         didSet {
             tweetTextLabel.text = tweet.text
+            usernameLabel.text = tweet.user.name
+            screennameLabel.text = "@\(tweet.user.screen_name)"
+            dateLabel.text = "\(tweet.createdAtString)"
             favoriteCountTextLabel.text = "\(tweet.favoriteCount!)"
             retweetCountTextLabel.text = "\(tweet.retweetCount)"
+            
+           
+            
+            profileImageView.af_setImage(withURL: tweet.user.profile_url)
+            
            
             if(tweet.favorited)!{
                 favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon-red"), for: .normal)
@@ -43,6 +55,8 @@ class TweetCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        profileImageView.layer.cornerRadius = 30
+        profileImageView.clipsToBounds = true
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
