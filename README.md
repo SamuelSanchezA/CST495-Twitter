@@ -2,7 +2,7 @@
 
 **Twitter** is a basic twitter app to read and compose tweets the [Twitter API](https://apps.twitter.com/).
 
-Time spent: **X** hours spent in total
+Time spent: **8** hours spent in total
 
 ## User Stories
 
@@ -38,7 +38,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+![Alt Text](https://github.com/SamuelSanchezA/CST495-Twitter/blob/master/assignment-5.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
@@ -50,7 +50,9 @@ Describe any challenges encountered while building the app.
 
 List an 3rd party libraries, icons, graphics, or other assets you used in your app.
 
-- [AFNetworking](https://github.com/AFNetworking/AFNetworking) - networking task library
+- [DateTools](https://github.com/MatthewYork/DateTools) - date formatting and comparison library
+- [TTTAttributedLabel](https://github.com/TTTAttributedLabel/TTTAttributedLabel) - detects links in text and makes them clickable
+- [AlamoImage](https://github.com/gchiacchio/AlamoImage) - Image fetching through url
 
 ## License
 
