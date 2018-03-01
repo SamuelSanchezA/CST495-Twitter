@@ -96,6 +96,14 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destVC = segue.destination as? TweetDetailViewController{
+            let senderCell = sender as! TweetCell
+            let indexPath = tableView.indexPath(for: senderCell)
+            destVC.tweet = tweets[(indexPath?.row)!]
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
