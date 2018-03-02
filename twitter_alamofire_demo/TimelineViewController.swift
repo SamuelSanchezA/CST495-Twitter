@@ -10,6 +10,8 @@ import UIKit
 
 class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
+    
+    @IBOutlet weak var profileImage: UIImageView!
     var tweets: [Tweet] = []
     var refreshControl: UIRefreshControl!
     @IBOutlet weak var tableView: UITableView!
@@ -18,6 +20,10 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        profileImage.af_setImage(withURL: (User.current?.profile_url)!)
+        profileImage.layer.cornerRadius = 15
+        profileImage.clipsToBounds = true
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -108,12 +114,6 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    @IBAction func didTapLogout(_ sender: Any) {
-        APIManager.shared.logout()
-    }
-    
     
     /*
      // MARK: - Navigation
