@@ -11,6 +11,11 @@ import DateToolsSwift
 import AlamofireImage
 import TTTAttributedLabel
 
+protocol TweetCellDelegate: class {
+    // TODO: Add required methods the delegate needs to implement
+    func tweetCell(_ tweetCell: TweetCell, didTap user: User)
+}
+
 class TweetCell: UITableViewCell, TTTAttributedLabelDelegate {
     
     @IBOutlet weak var tweetTextLabel: TTTAttributedLabel!
@@ -22,6 +27,8 @@ class TweetCell: UITableViewCell, TTTAttributedLabelDelegate {
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var favoriteCountTextLabel: UILabel!
     @IBOutlet weak var retweetCountTextLabel: UILabel!
+    
+    weak var delegate: TweetCellDelegate?
     
     var tweet: Tweet! {
         didSet {
@@ -63,6 +70,9 @@ class TweetCell: UITableViewCell, TTTAttributedLabelDelegate {
         // Initialization code
         profileImageView.layer.cornerRadius = 30
         profileImageView.clipsToBounds = true
+        let profileTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapUserProfile(_:)))
+        profileImageView.addGestureRecognizer(profileTapGestureRecognizer)
+        profileImageView.isUserInteractionEnabled = true
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -70,6 +80,12 @@ class TweetCell: UITableViewCell, TTTAttributedLabelDelegate {
         
         // Configure the view for the selected state
     }
+    
+    func didTapUserProfile(_ sender: UITapGestureRecognizer) {
+        // TODO: Call method on delegate
+        delegate?.tweetCell(self, didTap: tweet.user)
+    }
+    
     @IBAction func didTapFavorite(_ sender: Any) {
         // TODO: Update the local tweet model
         if(tweet.favorited == false){

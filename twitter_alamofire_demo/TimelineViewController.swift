@@ -8,7 +8,12 @@
 
 import UIKit
 
-class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, ComposeViewControllerDelegate {
+class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, ComposeViewControllerDelegate, TweetCellDelegate {
+    
+    func tweetCell(_ tweetCell: TweetCell, didTap user: User) {
+        performSegue(withIdentifier: "profile", sender: user)
+    }
+    
     
     @IBOutlet weak var profileImage: UIImageView!
     var tweets: [Tweet] = []
@@ -45,6 +50,7 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         
         getFeed()
     }
+    
     @IBAction func composeTweet(_ sender: Any) {
         performSegue(withIdentifier: "tweet", sender: nil)
     }
@@ -109,7 +115,7 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
-        
+        cell.delegate = self
         cell.tweet = tweets[indexPath.row]
         
         return cell
@@ -129,6 +135,18 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         else if let destVC = segue.destination as? ComposeViewController{
             destVC.delegate = self
         }
+        
+        else if let destVC = segue.destination as? ProfileViewController{
+            // Came from tableview
+            if(sender != nil){
+                destVC.user = sender as! User
+            }
+            // Profile picker in nav menu
+            else{
+                destVC.user = User.current
+            }
+        }
+        
     }
     
     override func didReceiveMemoryWarning() {

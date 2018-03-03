@@ -16,6 +16,7 @@ protocol ComposeViewControllerDelegate : NSObjectProtocol {
 
 class ComposeViewController: UIViewController, UITextViewDelegate{
     
+    @IBOutlet weak var charCount: UILabel!
     @IBOutlet weak var tweetBox: RSKPlaceholderTextView!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var screennameLabel: UILabel!
@@ -40,7 +41,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate{
     
     
     func textViewDidChange(_ textView: UITextView) {
-        print(textView.text)
+        //print(textView.text)
         if(textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty){
             tweetButton.isUserInteractionEnabled = false
             tweetButton.setTitleColor(UIColor.gray, for: .normal)
@@ -50,6 +51,22 @@ class ComposeViewController: UIViewController, UITextViewDelegate{
             tweetButton.setTitleColor(UIColor.white, for: .normal)
         }
     }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        // TODO: Check the proposed new text character count
+        // Allow or disallow the new text
+        // Set the max character limit
+        let characterLimit = 140
+        
+        // Construct what the new text would be if we allowed the user's latest edit
+        let newText = NSString(string: textView.text!).replacingCharacters(in: range, with: text)
+        
+        // TODO: Update Character Count Label
+        charCount.text = "\(characterLimit - newText.count)"
+        // The new text should be allowed? True/False
+        return newText.count < characterLimit
+    }
+    
     @IBAction func cancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
