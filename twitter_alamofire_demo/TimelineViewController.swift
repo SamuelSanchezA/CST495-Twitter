@@ -8,8 +8,7 @@
 
 import UIKit
 
-class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
-    
+class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, ComposeViewControllerDelegate {
     
     @IBOutlet weak var profileImage: UIImageView!
     var tweets: [Tweet] = []
@@ -46,6 +45,23 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         
         getFeed()
     }
+    @IBAction func composeTweet(_ sender: Any) {
+        performSegue(withIdentifier: "tweet", sender: nil)
+    }
+    
+    @IBAction func goToProfile(_ sender: Any) {
+        print("Going to profile")
+        performSegue(withIdentifier: "profile", sender: nil)
+    }
+    
+    @IBAction func logout(_ sender: Any) {
+        APIManager.shared.logout()
+    }
+    
+    func did(post: Tweet) {
+        // Do something
+        getFeed()
+    }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // Handle scroll behavior here
@@ -66,6 +82,7 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
     }
+    
     
     func refreshControlAction(_ refreshControl: UIRefreshControl) {
         APIManager.tweetReturnLimit = 20
@@ -107,6 +124,10 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
             let senderCell = sender as! TweetCell
             let indexPath = tableView.indexPath(for: senderCell)
             destVC.tweet = tweets[(indexPath?.row)!]
+        }
+        
+        else if let destVC = segue.destination as? ComposeViewController{
+            destVC.delegate = self
         }
     }
     

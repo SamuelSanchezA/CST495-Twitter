@@ -145,7 +145,7 @@ class TweetCell: UITableViewCell, TTTAttributedLabelDelegate {
         }
         //Days
         else if(timeDiff! < 604800){
-            formattedTime = "\(timeDiff! / 60 / 60 / 24)"
+            formattedTime = "\(timeDiff! / 60 / 60 / 24)d"
         }
         //Simple date format
         else{

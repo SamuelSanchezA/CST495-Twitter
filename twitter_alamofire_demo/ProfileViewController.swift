@@ -15,9 +15,6 @@ class ProfileViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-    @IBAction func logout(_ sender: Any) {
-        APIManager.shared.logout()
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
