@@ -19,7 +19,7 @@ class DetailTweetCell: UITableViewCell {
     var tweet: Tweet! {
         didSet{
             tweetLabel.text = tweet.text
-            profileImageView.layer.cornerRadius = 25
+            profileImageView.layer.cornerRadius = 34
             profileImageView.clipsToBounds = true
             profileImageView.af_setImage(withURL: tweet.user.profile_url)
             usernameLabel.text = tweet.user.name
