@@ -44,10 +44,7 @@ class TweetCell: UITableViewCell, TTTAttributedLabelDelegate {
             favoriteCountTextLabel.text = "\(formattedCounter(count: tweet.favoriteCount!))"
             retweetCountTextLabel.text = "\(formattedCounter(count: tweet.retweetCount))"
             
-           
-            
             profileImageView.af_setImage(withURL: tweet.user.profile_url)
-            
            
             if(tweet.favorited)!{
                 favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon-red"), for: .normal)
@@ -121,13 +118,13 @@ class TweetCell: UITableViewCell, TTTAttributedLabelDelegate {
         var formattedCount = ""
         // Billion, just in case
         if(count >= 1000000000){
-            formattedCount = String(format: "%.1fb", Double(count) / 1000000000.0)
+            formattedCount = String(format: "%.1fB", Double(count) / 1000000000.0)
         }
         else if(count >= 1000000){
-            formattedCount = String(format: "%.1fm", Double(count) / 1000000.0)
+            formattedCount = String(format: "%.1fM", Double(count) / 1000000.0)
         }
         else if(count >= 10000){
-            formattedCount = String(format: "%.1fk", Double(count) / 1000.0)
+            formattedCount = String(format: "%.1fK", Double(count) / 1000.0)
         }
         else{
             formattedCount = "\(count)"
@@ -165,9 +162,11 @@ class TweetCell: UITableViewCell, TTTAttributedLabelDelegate {
         }
         //Simple date format
         else{
+            let newDate = df.date(from: date)!
             df.dateStyle = .short
             df.timeStyle = .none
-            formattedTime = df.string(from: df.date(from: date)!)
+            formattedTime = df.string(from: newDate)
+            //formattedTime = "Date"
         }
         return formattedTime
     }

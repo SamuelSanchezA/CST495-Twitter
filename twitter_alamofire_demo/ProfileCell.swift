@@ -31,9 +31,28 @@ class ProfileCell: UITableViewCell {
             screennameLabel.text = "@\(user.screen_name)"
             descriptionLabel.text = user.description
             locationLabel.text = user.location
-            followersCountLabel.text = "\(user.followers ?? -1)"
-            followingCountLabel.text = "\(user.following ?? -1)"
+            followersCountLabel.text = formattedCounter(count: user.followers!)
+            followingCountLabel.text = formattedCounter(count: user.following!)
         }
+    }
+    
+    func formattedCounter(count: Int) -> String{
+        var formattedCount = ""
+        // Billion, just in case
+        if(count >= 1000000000){
+            formattedCount = String(format: "%.1fB", Double(count) / 1000000000.0)
+        }
+        else if(count >= 1000000){
+            formattedCount = String(format: "%.1fM", Double(count) / 1000000.0)
+        }
+        else if(count >= 10000){
+            formattedCount = String(format: "%.1fK", Double(count) / 1000.0)
+        }
+        else{
+            formattedCount = "\(count)"
+        }
+        
+        return formattedCount
     }
     
     override func awakeFromNib() {

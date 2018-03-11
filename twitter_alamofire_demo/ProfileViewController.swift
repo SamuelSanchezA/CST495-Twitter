@@ -8,22 +8,41 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TweetCellDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
     var user : User!{
         didSet{
-            print(user.name)
+            print("User: \(user.screen_name)")
         }
     }
+    
+    var tweets : [Tweet] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.reloadData()
-        // Do any additional setup after loading the view.
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 100
+        
+        getFeed()
+    }
+    
+    func getFeed(){
+        APIManager.shared.getUserTimeLine(user_id: user.id) { (tweets, error) in
+            if let tweets = tweets {
+                //self.isMoreDataLoading = false
+                self.tweets = tweets
+                self.tableView.reloadData()
+            } else if let error = error {
+                print("Error getting home timeline: " + error.localizedDescription)
+            }
+//            self.loadingMoreView?.stopAnimating()
+//            self.refreshControl.endRefreshing()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -31,8 +50,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Dispose of any resources that can be recreated.
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return tweets.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -42,18 +65,25 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             return cell
         }
         else{
-            return UITableViewCell()
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
+            cell.tweet = tweets[indexPath.row - 1]
+            cell.delegate = self
+            return cell
         }
     }
+    
+    func tweetCell(_ tweetCell: TweetCell, didTap user: User) {
+         //performSegue(withIdentifier: "profile", sender: user)
+    }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if let destVC = segue.destination as? TweetDetailViewController{
+            let senderCell = sender as! TweetCell
+            let indexPath = tableView.indexPath(for: senderCell)
+            destVC.tweet = tweets[(indexPath?.row)! - 1]
+        }
     }
-    */
 
 }

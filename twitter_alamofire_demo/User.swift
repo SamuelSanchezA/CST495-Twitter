@@ -11,6 +11,7 @@ import DateToolsSwift
 
 class User {
     
+    var id: Int64
     var name: String
     var screen_name: String
     var profile_url: URL
@@ -35,6 +36,7 @@ class User {
             }
             return _current
         }
+        
         set (user) {
             _current = user
             let defaults = UserDefaults.standard
@@ -49,6 +51,7 @@ class User {
     
     init(dictionary: [String: Any]) {
         //print(dictionary)
+        id = dictionary["id"] as! Int64
         name = dictionary["name"] as! String
         screen_name = dictionary["screen_name"] as! String
         if(dictionary["profile_image_url_https"] != nil){

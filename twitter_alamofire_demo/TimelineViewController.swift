@@ -14,7 +14,6 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         performSegue(withIdentifier: "profile", sender: user)
     }
     
-    
     @IBOutlet weak var profileImage: UIImageView!
     var tweets: [Tweet] = []
     var refreshControl: UIRefreshControl!
